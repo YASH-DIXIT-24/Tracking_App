@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block style %}
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+         var data = google.visualization.arrayToDataTable([
+			{% for key, value in data.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var options = {
+          title: '',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock style %}
+{% block content %}
+<legend align="center">{{trackers.tracker_name}}</legend>
+<div   style="margin-top:20px margin-left:10px  margin-right:20px " id="piechart_3d" style="width: 500px; height: 500px;"></div>
+<table  style="margin-top:10px" class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">On</th>
+      <th scope="col">Value</th>
+      <th colspan="2" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for log in trackers.logs %}
+    <tr>
+      <td>{{log.when}}</td>
+      <td>{{log.value}}</td>
+      <td>{{log.notes}}</td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Edit</a><br>
+            <a class="dropdown-item" href="{{url_for('delete_log',log_id=log.log_id,tracker_id=trackers.tracker_id)}}">Delete</a>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+
+
+{% endblock content %}

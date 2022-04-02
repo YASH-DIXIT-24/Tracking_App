@@ -1,0 +1,47 @@
+
+{% extends "layout.html" %}
+{% block content %}
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Tracker</th>
+      <th scope="col">Last Tracked</th>
+      <th scope="col"></th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tracker in trackers %}
+    <tr>
+      <td><a href="{{url_for('track_info',tracker_id=tracker.tracker_id)}}">{{tracker.tracker_name}}</a></td>
+      <td>{{lat_date[tracker.tracker_name]}}</td>
+      <td>
+        <a href="{{url_for('tracker_log',tracker_id=tracker.tracker_id)}}">
+          <span class="glyphicon glyphicon-plus-sign" ></span>
+        </a>
+      </td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{url_for('update_tracker',tracker_id=tracker.tracker_id)}}">Edit</a><br>
+            <a class="dropdown-item" href="{{url_for('delete_tracker',tracker_id=tracker.tracker_id)}}">Delete</a>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+<a href="{{url_for('add_tracker')}}">
+<button type="button" class="btn btn-success">
+  Add
+</button>
+</a>
+
+{% endblock content %}
+
+

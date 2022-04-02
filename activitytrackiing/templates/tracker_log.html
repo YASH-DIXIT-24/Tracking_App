@@ -1,0 +1,30 @@
+        {% extends "layout.html" %}
+        {% block content %}
+        <div class="content-section">
+            <fieldset class="form-group">
+              <form method="POST" action="">
+                  <legend class="border-bottom mb-4">Add {{tracker.tracker_name}}</legend>
+
+                  <label for="birthdaytime">When</label><br>
+                  <input type="datetime-local" id="birthdaytime" name="log_time"><br>
+                  <br>
+                  {% for settings in tracker.settings.split(sep=',')%}
+                     <div class="checkbox-inline">
+                      <input class="checkbox-inline" type="checkbox" id="inlineCheckbox1" name="value" value="{{settings}}">
+                      <label class="form-check-label" for="inlineCheckbox1">{{settings}}</label>
+                     </div>
+                  {% endfor %}
+                  <br>
+
+                  <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Notes</label>
+                      <textarea class="form-control" name="notes" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <br>
+
+
+                  <button type="submit" class="btn btn-primary">Done</button>
+                  </form>
+                </fieldset>
+            <div>
+        {% endblock content %}

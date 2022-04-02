@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <fieldset class="form-group">
+      <form method="POST" action="">
+        <div class="form-group">
+          <label for="username">Name</label>
+          <input type="text" name="tname" class="form-control" id="username" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="type" id="exampleRadios1" value="Numerical" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Numerical
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="type" id="exampleRadios2" value="Multiple Choice">
+          <label class="form-check-label" for="exampleRadios2">
+            Multiple Choice
+          </label>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="settings">Settings</label>
+          <input type="text" name="set" class="form-control" id="settings" aria-describedby="emailHelp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Log It</button>
+      </form>
+    </fieldset>
+  <div>
+    {% endblock content %}
